@@ -1,0 +1,50 @@
+# Agent / local instruction files
+AGENTS.md
+CODEX.md
+IMPLEMENTATION_NOTES.md
+CONTEXT.md
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+
+# Environment files
+.env
+.env.*
+
+# Node / frontend
+frontend/node_modules/
+frontend/dist/*
+!frontend/dist/.gitkeep
+frontend/.vite/
+frontend/package.json.md5
+frontend/wailsjs/
+
+# Go
+bin/
+dist/
+build/bin/
+coverage.out
+*.coverprofile
+*.test
+*.syso
+
+# Wails / generated binaries
+*.exe
+*.app
+*.msi
+*.deb
+*.rpm
+
+# Derived Windows build assets
+build/windows/icon.ico
