@@ -1,4 +1,4 @@
-# pwpdf
+![pwpdf](frontend/src/assets/pwpdflogo.png)
 
 ![Go](https://img.shields.io/badge/go-1.26%2B-00ADD8?logo=go&logoColor=white)
 ![Wails](https://img.shields.io/badge/gui-wails-v2-ff875f)
@@ -11,18 +11,21 @@
 
 It is built in Go, uses `pdfcpu` for encryption, ships with a Wails desktop app, and leans into a compact old-school desktop aesthetic instead of pretending to be a web app in a window.
 
-## Preview
+## Why It Exists
 
-Drop your screenshots and gifs under `docs/images/` and reference them with relative paths.
+Most people do not need a full PDF suite to put a password on one file.
 
-Recommended pattern:
+They need:
 
-```md
-![Main Window](docs/images/main-window.png)
-![Drag and Drop Flow](docs/images/drag-drop.gif)
-```
+- SOUND ON! (optional but recommended)
+- pick a PDF
+- type a password
+- save the protected copy
+- move on with your life
 
-That is the simplest and most portable approach for GitHub READMEs. It keeps assets versioned with the repo and avoids broken external links later.
+That is the whole point of `pwpdf`.
+
+![Main Window](docs/main-window.png)
 
 ## What It Does
 
@@ -34,19 +37,6 @@ That is the simplest and most portable approach for GitHub READMEs. It keeps ass
 - Prompts securely for a password in the terminal when needed
 - Defaults output names to `*_encrypted.pdf`
 - Includes optional shell integration helpers for Windows and Linux
-
-## Why It Exists
-
-Most people do not need a full PDF suite to put a password on one file.
-
-They need:
-
-- pick a PDF
-- type a password
-- save the protected copy
-- move on
-
-That is the whole point of `pwpdf`.
 
 ## How It Works
 
