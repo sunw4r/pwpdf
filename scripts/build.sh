@@ -7,6 +7,14 @@ if ! command -v wails >/dev/null 2>&1; then
   exit 1
 fi
 
+build_tags=()
+
+if [[ "$(uname -s)" == "Linux" ]] && command -v pkg-config >/dev/null 2>&1; then
+  if pkg-config --exists webkit2gtk-4.1; then
+    build_tags=(-tags webkit2_41)
+  fi
+fi
+
 go run ./scripts/syncicons
 go test ./...
-wails build -clean -tags webkit2_41
+wails build -clean "${build_tags[@]}"

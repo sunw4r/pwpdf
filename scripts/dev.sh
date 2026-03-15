@@ -7,4 +7,12 @@ if ! command -v wails >/dev/null 2>&1; then
   exit 1
 fi
 
-wails dev -tags webkit2_41
+dev_tags=()
+
+if [[ "$(uname -s)" == "Linux" ]] && command -v pkg-config >/dev/null 2>&1; then
+  if pkg-config --exists webkit2gtk-4.1; then
+    dev_tags=(-tags webkit2_41)
+  fi
+fi
+
+wails dev "${dev_tags[@]}"

@@ -1,10 +1,11 @@
 WAILS ?= wails
-WAILS_TAGS ?= webkit2_41
+WAILS_TAGS ?= $(shell if [ "$$(uname -s)" = "Linux" ] && command -v pkg-config >/dev/null 2>&1 && pkg-config --exists webkit2gtk-4.1; then printf '%s' webkit2_41; fi)
+WAILS_TAG_ARGS := $(if $(strip $(WAILS_TAGS)),-tags $(WAILS_TAGS),)
 
 .PHONY: dev build build-all test frontend-install frontend-build cli
 
 dev:
-	$(WAILS) dev -tags $(WAILS_TAGS)
+	$(WAILS) dev $(WAILS_TAG_ARGS)
 
 frontend-install:
 	cd frontend && npm install
@@ -18,7 +19,7 @@ test:
 build:
 	go run ./scripts/syncicons
 	$(MAKE) test
-	$(WAILS) build -clean -tags $(WAILS_TAGS)
+	$(WAILS) build -clean $(WAILS_TAG_ARGS)
 
 build-all:
 	@test -n "$(SELECTOR)" || (echo "SELECTOR is required. Example: make build-all SELECTOR=all" >&2; exit 1)

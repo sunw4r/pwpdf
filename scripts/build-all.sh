@@ -470,9 +470,9 @@ ensure_command npm
 WAILS_BIN="$(resolve_wails_bin)"
 ensure_command "$WAILS_BIN"
 
-mapfile -t LINUX_PLATFORMS < <(parse_platform_list "$LINUX_PLATFORMS_RAW")
-mapfile -t WINDOWS_PLATFORMS < <(parse_platform_list "$WINDOWS_PLATFORMS_RAW")
-mapfile -t MACOS_PLATFORMS < <(parse_platform_list "$MACOS_PLATFORMS_RAW")
+LINUX_PLATFORMS=($(parse_platform_list "$LINUX_PLATFORMS_RAW"))
+WINDOWS_PLATFORMS=($(parse_platform_list "$WINDOWS_PLATFORMS_RAW"))
+MACOS_PLATFORMS=($(parse_platform_list "$MACOS_PLATFORMS_RAW"))
 
 # The selector is required so CI callers have to be explicit about whether they
 # want the full matrix, one OS family, or a single exact target.

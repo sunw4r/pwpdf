@@ -157,6 +157,7 @@ There is no invasive Finder integration step. The practical path is:
 - Go `1.26.1` or newer
 - Node.js `18+`
 - Wails CLI
+- On macOS: Xcode Command Line Tools
 
 Install Wails CLI:
 
@@ -165,6 +166,18 @@ go install github.com/wailsapp/wails/v2/cmd/wails@latest
 ```
 
 Linux desktop builds also need the GTK/WebKit dependencies required by Wails.
+
+On macOS, install the Apple toolchain with:
+
+```bash
+xcode-select --install
+```
+
+Then verify the local environment with:
+
+```bash
+wails doctor
+```
 
 ### Development
 
@@ -202,6 +215,13 @@ PowerShell:
 .\scripts\build.ps1
 ```
 
+On macOS, the direct local build path is:
+
+```bash
+./scripts/build.sh
+scripts/build-all.sh --selector macos
+```
+
 ## Multi-Platform Builds
 
 There is a matrix helper for release builds:
@@ -223,6 +243,7 @@ Supported selectors:
 
 Notes:
 
+- On macOS, use `scripts/build-all.sh --selector macos` or `scripts/build-all.sh --selector darwin/universal` to build only the local `.app` without Docker
 - Linux foreign-architecture builds can fall back to Docker automatically
 - Windows targets can be built through Wails from Linux in this repository workflow
 - macOS desktop packaging still needs a macOS machine or runner for the real `.app` output
