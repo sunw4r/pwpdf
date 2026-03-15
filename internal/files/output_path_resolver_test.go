@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/sp/pwpdf/internal/files"
+	"github.com/sunw4r/pwpdf/internal/files"
 )
 
 func TestOutputPathResolverBuildsDefaultName(t *testing.T) {

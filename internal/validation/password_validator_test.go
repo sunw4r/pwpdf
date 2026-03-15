@@ -3,7 +3,7 @@ package validation_test
 import (
 	"testing"
 
-	"github.com/sp/pwpdf/internal/validation"
+	"github.com/sunw4r/pwpdf/internal/validation"
 )
 
 func TestPasswordValidatorRejectsEmptyPassword(t *testing.T) {

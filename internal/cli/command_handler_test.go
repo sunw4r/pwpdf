@@ -10,12 +10,12 @@ import (
 
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 
-	"github.com/sp/pwpdf/internal/application"
-	"github.com/sp/pwpdf/internal/files"
-	"github.com/sp/pwpdf/internal/pdf"
-	"github.com/sp/pwpdf/internal/platform"
-	"github.com/sp/pwpdf/internal/validation"
-	"github.com/sp/pwpdf/internal/version"
+	"github.com/sunw4r/pwpdf/internal/application"
+	"github.com/sunw4r/pwpdf/internal/files"
+	"github.com/sunw4r/pwpdf/internal/pdf"
+	"github.com/sunw4r/pwpdf/internal/platform"
+	"github.com/sunw4r/pwpdf/internal/validation"
+	"github.com/sunw4r/pwpdf/internal/version"
 )
 
 func TestNormalizeEncryptArgsAcceptsInputBeforeFlags(t *testing.T) {

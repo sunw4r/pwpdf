@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/sp/pwpdf/internal/files"
-	"github.com/sp/pwpdf/internal/pdf"
-	"github.com/sp/pwpdf/internal/validation"
+	"github.com/sunw4r/pwpdf/internal/files"
+	"github.com/sunw4r/pwpdf/internal/pdf"
+	"github.com/sunw4r/pwpdf/internal/validation"
 )
 
 type EncryptionWorkflow struct {

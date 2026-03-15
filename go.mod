@@ -1,4 +1,4 @@
-module github.com/sp/pwpdf
+module github.com/sunw4r/pwpdf
 
 go 1.26.1
 

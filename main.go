@@ -14,14 +14,14 @@ import (
 	wailsmac "github.com/wailsapp/wails/v2/pkg/options/mac"
 	wailswindows "github.com/wailsapp/wails/v2/pkg/options/windows"
 
-	"github.com/sp/pwpdf/internal/application"
-	"github.com/sp/pwpdf/internal/cli"
-	"github.com/sp/pwpdf/internal/files"
-	"github.com/sp/pwpdf/internal/gui"
-	"github.com/sp/pwpdf/internal/pdf"
-	"github.com/sp/pwpdf/internal/platform"
-	"github.com/sp/pwpdf/internal/validation"
-	"github.com/sp/pwpdf/internal/version"
+	"github.com/sunw4r/pwpdf/internal/application"
+	"github.com/sunw4r/pwpdf/internal/cli"
+	"github.com/sunw4r/pwpdf/internal/files"
+	"github.com/sunw4r/pwpdf/internal/gui"
+	"github.com/sunw4r/pwpdf/internal/pdf"
+	"github.com/sunw4r/pwpdf/internal/platform"
+	"github.com/sunw4r/pwpdf/internal/validation"
+	"github.com/sunw4r/pwpdf/internal/version"
 )
 
 //go:embed all:frontend/dist
@@ -93,7 +93,7 @@ func runDesktopApplication(desktopApp *gui.App) error {
 			desktopApp.OnDomReady(ctx)
 		},
 		SingleInstanceLock: &options.SingleInstanceLock{
-			UniqueId:               "github.com/sp/pwpdf",
+			UniqueId:               "com.sunw4r.pwpdf",
 			OnSecondInstanceLaunch: desktopApp.HandleSecondInstanceLaunch,
 		},
 		Windows: &wailswindows.Options{

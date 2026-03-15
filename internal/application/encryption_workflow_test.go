@@ -10,10 +10,10 @@ import (
 	"github.com/pdfcpu/pdfcpu/pkg/api"
 	"github.com/pdfcpu/pdfcpu/pkg/pdfcpu/model"
 
-	"github.com/sp/pwpdf/internal/application"
-	"github.com/sp/pwpdf/internal/files"
-	"github.com/sp/pwpdf/internal/pdf"
-	"github.com/sp/pwpdf/internal/validation"
+	"github.com/sunw4r/pwpdf/internal/application"
+	"github.com/sunw4r/pwpdf/internal/files"
+	"github.com/sunw4r/pwpdf/internal/pdf"
+	"github.com/sunw4r/pwpdf/internal/validation"
 )
 
 func TestEncryptionWorkflowEncryptsPDF(t *testing.T) {

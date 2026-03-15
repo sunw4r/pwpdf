@@ -1,6 +1,6 @@
 package gui
 
-import "github.com/sp/pwpdf/internal/application"
+import "github.com/sunw4r/pwpdf/internal/application"
 
 const (
 	EventPreparedDocument = "app:prepared-document"

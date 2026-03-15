@@ -7,9 +7,9 @@ import (
 	"os"
 	"strings"
 
-	"github.com/sp/pwpdf/internal/application"
-	"github.com/sp/pwpdf/internal/platform"
-	"github.com/sp/pwpdf/internal/version"
+	"github.com/sunw4r/pwpdf/internal/application"
+	"github.com/sunw4r/pwpdf/internal/platform"
+	"github.com/sunw4r/pwpdf/internal/version"
 )
 
 type CommandHandler struct {
