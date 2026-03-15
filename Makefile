@@ -17,9 +17,7 @@ test:
 	go test ./...
 
 build:
-	go run ./scripts/syncicons
-	$(MAKE) test
-	$(WAILS) build -clean $(WAILS_TAG_ARGS)
+	./scripts/build.sh
 
 build-all:
 	@test -n "$(SELECTOR)" || (echo "SELECTOR is required. Example: make build-all SELECTOR=all" >&2; exit 1)

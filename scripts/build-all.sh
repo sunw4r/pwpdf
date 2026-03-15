@@ -221,6 +221,27 @@ copy_build_output() {
   cp -R build/bin/. "$target_dir/"
 }
 
+export_darwin_cli_binary() {
+  local output_dir="$1"
+  local app_bundle
+  local binary_name
+  local embedded_binary
+
+  app_bundle="$(find "$output_dir" -maxdepth 1 -type d -name '*.app' | head -n 1)"
+  [[ -n "$app_bundle" ]] || return 0
+
+  binary_name="$(basename "$app_bundle" .app)"
+  embedded_binary="$app_bundle/Contents/MacOS/$binary_name"
+
+  if [[ ! -f "$embedded_binary" ]]; then
+    echo "Missing macOS CLI binary inside app bundle: $embedded_binary" >&2
+    return 1
+  fi
+
+  cp "$embedded_binary" "$output_dir/$binary_name"
+  chmod +x "$output_dir/$binary_name"
+}
+
 selector_target_os() {
   case "$1" in
     linux | linux/*)
@@ -450,6 +471,12 @@ run_wails_build() {
 
   if ! copy_build_output "$platform_slug"; then
     echo "Failed to collect build artifacts for $platform" >&2
+    FAILED_PLATFORMS+=("$platform")
+    return 0
+  fi
+
+  if [[ "$platform" == darwin/* ]] && ! export_darwin_cli_binary "$DIST_DIR/$platform_slug"; then
+    echo "Failed to export standalone macOS CLI binary for $platform" >&2
     FAILED_PLATFORMS+=("$platform")
     return 0
   fi

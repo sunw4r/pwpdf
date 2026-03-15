@@ -222,6 +222,11 @@ On macOS, the direct local build path is:
 scripts/build-all.sh --selector macos
 ```
 
+macOS builds export both artifacts:
+
+- `pwpdf.app`
+- `pwpdf` as a standalone CLI binary copied out of `pwpdf.app/Contents/MacOS/pwpdf`
+
 ## Multi-Platform Builds
 
 There is a matrix helper for release builds:
@@ -243,7 +248,7 @@ Supported selectors:
 
 Notes:
 
-- On macOS, use `scripts/build-all.sh --selector macos` or `scripts/build-all.sh --selector darwin/universal` to build only the local `.app` without Docker
+- On macOS, use `scripts/build-all.sh --selector macos` or `scripts/build-all.sh --selector darwin/universal` to build the local `.app` and a standalone `pwpdf` CLI binary without Docker
 - Linux foreign-architecture builds can fall back to Docker automatically
 - Windows targets can be built through Wails from Linux in this repository workflow
 - macOS desktop packaging still needs a macOS machine or runner for the real `.app` output
