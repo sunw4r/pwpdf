@@ -188,6 +188,25 @@ parse_platform_list() {
   done
 }
 
+array_has_values() {
+  local array_name="$1"
+  eval "[[ \${${array_name}[0]+x} ]]"
+}
+
+run_platform_group() {
+  local array_name="$1"
+  local tags="$2"
+  local platform
+
+  # Bash 3.2 with `set -u` treats empty arrays as unbound during direct
+  # expansion, so expand through `eval` only when the array actually has items.
+  eval "set -- \${${array_name}[@]+\"\${${array_name}[@]}\"}"
+
+  for platform in "$@"; do
+    run_wails_build "$platform" "$tags"
+  done
+}
+
 copy_build_output() {
   local platform_slug="$1"
   local target_dir="$DIST_DIR/$platform_slug"
@@ -443,16 +462,16 @@ print_summary() {
   echo "Build summary"
   echo "Artifacts directory: $DIST_DIR"
 
-  if [[ "${#BUILT_PLATFORMS[@]}" -gt 0 ]]; then
+  if array_has_values BUILT_PLATFORMS; then
     printf 'Built: %s\n' "${BUILT_PLATFORMS[*]}"
   fi
 
-  if [[ "${#SKIPPED_PLATFORMS[@]}" -gt 0 ]]; then
+  if array_has_values SKIPPED_PLATFORMS; then
     printf 'Skipped: %s\n' "${SKIPPED_PLATFORMS[*]}"
     echo "macOS artifacts require running this script on macOS or using CI with a macOS runner."
   fi
 
-  if [[ "${#FAILED_PLATFORMS[@]}" -gt 0 ]]; then
+  if array_has_values FAILED_PLATFORMS; then
     printf 'Failed: %s\n' "${FAILED_PLATFORMS[*]}"
     echo "Some targets may require host-specific SDKs, cross toolchains, or Wails support on the current machine."
   fi
@@ -482,24 +501,16 @@ mkdir -p "$DIST_DIR"
 
 LINUX_TAGS="$(linux_tags)"
 
-for platform in "${LINUX_PLATFORMS[@]}"; do
-  run_wails_build "$platform" "$LINUX_TAGS"
-done
-
-for platform in "${WINDOWS_PLATFORMS[@]}"; do
-  run_wails_build "$platform" ""
-done
-
-for platform in "${MACOS_PLATFORMS[@]}"; do
-  run_wails_build "$platform" ""
-done
+run_platform_group LINUX_PLATFORMS "$LINUX_TAGS"
+run_platform_group WINDOWS_PLATFORMS ""
+run_platform_group MACOS_PLATFORMS ""
 
 print_summary
 
-if [[ "$FAIL_ON_SKIP" == "1" ]] && [[ "${#SKIPPED_PLATFORMS[@]}" -gt 0 ]]; then
+if [[ "$FAIL_ON_SKIP" == "1" ]] && array_has_values SKIPPED_PLATFORMS; then
   exit 1
 fi
 
-if [[ "$FAIL_ON_FAILURE" == "1" ]] && [[ "${#FAILED_PLATFORMS[@]}" -gt 0 ]]; then
+if [[ "$FAIL_ON_FAILURE" == "1" ]] && array_has_values FAILED_PLATFORMS; then
   exit 1
 fi
